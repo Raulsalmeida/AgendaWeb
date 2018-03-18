@@ -33,18 +33,6 @@ public class Cadastro extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet Cadastro</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet Cadastro at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -100,21 +88,20 @@ public class Cadastro extends HttpServlet {
 "    <body>\n" +
 "        <h1>Cadastro</h1>\n" +
 "        <hr>\n" +
-"        <form action=\"CadastroServlet\">\n" +
-"            Nome:<input type=\"text\" name=\"nome\"/><br>\n" +
-"            Email: <input type=\"text\" name=\"email\"/><br>\n" +
-"            Telefone: <input type=\"text\" name=\"telefone\"/><br>\n" +
-"            Rua: <input type=\"text\" name=\"rua\"/><br>\n" +
-"            Bairro: <input type=\"text\" name=\"bairro\"/><br>\n" +
-"            Cidade: <input type=\"text\" name=\"cidade\"/><br>\n" +
-"            Estado: <input type=\"text\" name=\"estado\"/><br>\n" +
+"        <form action=\"Digite o nome do contato\">\n" +
+"            Nome:<input type=\"text\" name=\"nomeContato\"/><br>\n" +
 "            <input type=\"submit\" value=\"Enviar\">\n" +
 "        </form>\n" +
 "        <a href=\"index.html\">Voltar</a>\n" +
 "    </body>\n" +
 "</html>";
                 this.editar(request, response);
+                break;
+            default: 
+                request.setAttribute("contatos", this.agenda);
+                request.getRequestDispatcher("index.html").forward(request,response);
         }
+        
     }
     
     /**
@@ -172,16 +159,16 @@ public class Cadastro extends HttpServlet {
     public void editar(HttpServletRequest request, HttpServletResponse response ) throws IOException {
          
          String nomeContato = request.getParameter("nomeContato");
-         
          String nome = request.getParameter("nome");
-         String email = request.getParameter("email");
-         String telefone = request.getParameter("telefone");
-         String rua = request.getParameter("rua");
-         String bairro = request.getParameter("bairro");
-         String cidade = request.getParameter("cidade");
-         String estado = request.getParameter("estado");
+         
         for(int i = 0; i < agenda.size(); i++){
             if(nomeContato == nome){
+                String email = request.getParameter("email");
+                String telefone = request.getParameter("telefone");
+                String rua = request.getParameter("rua");
+                String bairro = request.getParameter("bairro");
+                String cidade = request.getParameter("cidade");
+                String estado = request.getParameter("estado");
                 Contato contato = (Contato) this.agenda.get(i);
                 contato.setNome(nome);
                 contato.setEmail(email);
