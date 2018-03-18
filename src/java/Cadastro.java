@@ -88,8 +88,32 @@ public class Cadastro extends HttpServlet {
 "</html>";
                 break;
             case "/remover":
-                response.sendRedirect("/index.html");
+                this.remover(request, response);
                 break;
+            case "/editar":
+                String editarHTML = "<html>\n" +
+"    <head>\n" +
+"        <title>TODO supply a title</title>\n" +
+"        <meta charset=\"UTF-8\">\n" +
+"        <meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\">\n" +
+"    </head>\n" +
+"    <body>\n" +
+"        <h1>Cadastro</h1>\n" +
+"        <hr>\n" +
+"        <form action=\"CadastroServlet\">\n" +
+"            Nome:<input type=\"text\" name=\"nome\"/><br>\n" +
+"            Email: <input type=\"text\" name=\"email\"/><br>\n" +
+"            Telefone: <input type=\"text\" name=\"telefone\"/><br>\n" +
+"            Rua: <input type=\"text\" name=\"rua\"/><br>\n" +
+"            Bairro: <input type=\"text\" name=\"bairro\"/><br>\n" +
+"            Cidade: <input type=\"text\" name=\"cidade\"/><br>\n" +
+"            Estado: <input type=\"text\" name=\"estado\"/><br>\n" +
+"            <input type=\"submit\" value=\"Enviar\">\n" +
+"        </form>\n" +
+"        <a href=\"index.html\">Voltar</a>\n" +
+"    </body>\n" +
+"</html>";
+                this.editar(request, response);
         }
     }
     
@@ -171,7 +195,7 @@ public class Cadastro extends HttpServlet {
          response.sendRedirect("/index.html");
      }
     
-    public void apagar(HttpServletRequest request, HttpServletResponse response ) 
+    public void remover(HttpServletRequest request, HttpServletResponse response ) 
              throws IOException {
          String nomeContato = request.getParameter("nomeContato");
          String nome = request.getParameter("nome");
